@@ -13,6 +13,10 @@
     ]
   },
   "rules": {
+    "curly": [
+      true,
+      "as-needed"
+    ],
     "export-name": [
       true,
       {
@@ -47,6 +51,7 @@
     ],
     "member-access": true,
     "member-ordering": false,
+    "newline-before-return": true,
     "no-any": false,
     "no-backbone-get-set-outside-model": false,
     "no-console": false,
@@ -84,6 +89,14 @@
     "no-unused-variable": false,
     "no-use-before-declare": false,
     "non-literal-fs-path": false,
+    "ordered-imports": true,
+    "typedef": [
+      true,
+      "parameter",
+      "arrow-parameter",
+      "member-variable-declaration",
+      "object-destructuring"
+    ],
     "variable-name": [
       true,
       "ban-keywords",

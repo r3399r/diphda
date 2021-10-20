@@ -1,36 +1,31 @@
 import { WebhookRequestBody } from '@line/bot-sdk';
+import { bindings } from 'src/bindings';
+import { ChatService } from 'src/logic/ChatService';
+import { BindingsHelper } from 'src/util/BindingsHelper';
 
 export async function voucher(
   event: WebhookRequestBody,
   _context: any
 ): Promise<any> {
-  console.log(event);
+  BindingsHelper.bindClientConfig({
+    channelAccessToken: String(process.env.CHANNEL_TOKEN),
+    channelSecret: String(process.env.CHANNEL_SECRET),
+  });
 
-  // BindingsHelper.bindClientConfig(Channel.helpMeConfig[Channel.environment]);
+  const chatService: ChatService = bindings.get<ChatService>(ChatService);
+  const eventType = event.events[0].type;
 
-  // const helpMeService: HelpMeService = bindings.get<HelpMeService>(
-  //   HelpMeService
-  // );
-  // try {
-  //   switch (
-  //   event.events[0].type // eventType
-  //   ) {
-  //     case 'follow':
-  //       await helpMeService.receiveFollowEvent(event.events[0]);
-  //       break;
-  //     case 'unfollow':
-  //       await helpMeService.receiveUnFollowEvent(event.events[0]);
-  //       break;
-  //     case 'postback':
-  //       await helpMeService.receivePostback(event.events[0]);
-  //       break;
-  //     case 'message':
-  //       await helpMeService.receiveMessage(event.events[0]);
-  //       break;
-  //     default:
-  //   }
-  // } catch (e) {
-  //   console.log(JSON.stringify(e));
-  //   await helpMeService.informTeacher(`ERROR!!!!\n${new Date().toString()}`);
-  // }
+  try {
+    switch (eventType) {
+      case 'follow':
+        await chatService.receiveFollowEvent(event.events[0]);
+        break;
+      case 'message':
+        await chatService.receiveMessage(event.events[0]);
+        break;
+      default:
+    }
+  } catch (e) {
+    console.error('[ERROR]', JSON.stringify(e));
+  }
 }

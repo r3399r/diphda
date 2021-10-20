@@ -79,6 +79,10 @@ Resources:
         Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/${LambdaExecutionRole}"
         CodeUri: ../../dist/webpack/lambda
         MemorySize: 128
+        Environment:
+          Variables:
+            CHANNEL_TOKEN: !Sub '{{resolve:ssm:${TargetEnvr}-diphda-channel-token:1}}'
+            CHANNEL_SECRET: !Sub '{{resolve:ssm:${TargetEnvr}-diphda-channel-secret:1}}'
     InvokePermissionVoucher:
       Type: AWS::Lambda::Permission
       DependsOn: [ServerlessApi, LambdaVoucher]

@@ -5,5 +5,9 @@ node_modules/
 dist
 build
 
+# test files
+tmp
+coverage
+
 # aws
-packaged.yaml 
+packaged.yaml

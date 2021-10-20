@@ -7,6 +7,8 @@ export async function voucher(
   event: WebhookRequestBody,
   _context: any
 ): Promise<any> {
+  console.info(event.events[0]);
+
   BindingsHelper.bindClientConfig({
     channelAccessToken: String(process.env.CHANNEL_TOKEN),
     channelSecret: String(process.env.CHANNEL_SECRET),

@@ -32,7 +32,7 @@ Resources:
             "swagger": "2.0",
             "info": {
               "version": "2020-01-06T07:45:41Z",
-              "title": !Sub "${TargetEnvr}-diphda-api"
+              "title": !Sub "${TargetEnvr}-celestial-diphda-api"
             },
             "paths": {
               "/voucher": {

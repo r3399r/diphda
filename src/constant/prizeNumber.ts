@@ -1,11 +1,23 @@
 // 國旅券
-export const DOMESTIC_TRAVEL = ['21', '32', '98', '67', '97', '410'];
+export const DOMESTIC_TRAVEL = [
+  '21',
+  '32',
+  '98',
+  '67',
+  '97',
+  '410',
+  '87',
+  '04',
+  '40',
+  '29',
+  '71',
+];
 
 // i原券
-export const I_YAUN = ['64', '85'];
+export const I_YAUN = ['64', '85', '12', '59'];
 
 // 農遊券
-export const AGRICULTURE = ['89', '32', '54', '597', '453', '152'];
+export const AGRICULTURE = ['89', '32', '54', '597', '453', '152', '50', '13'];
 
 // 藝FUN券
 export const ART_FUN_DIGIT = ['96', '15', '07', '30', '73', '98', '19', '11'];

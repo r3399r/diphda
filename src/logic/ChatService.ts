@@ -18,7 +18,7 @@ export class ChatService {
     await this.client.replyMessage(replyToken, [
       {
         type: 'text',
-        text: '請輸入身分證字號(至少末三碼)查詢五倍加碼券是否中獎\n亦可用","分隔一次查詢多筆\n[範例]\n123\n54321\n123,987,456',
+        text: '請輸入身分證字號(至少末三碼)查詢五倍加碼券是否中獎，亦可一次查詢多筆(用「,」分隔)\n[範例]\n123\n123,987,456',
       },
       {
         type: 'text',

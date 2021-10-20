@@ -18,7 +18,7 @@ export class ChatService {
     await this.client.replyMessage(replyToken, [
       {
         type: 'text',
-        text: '請輸入身分證字號(至少末三碼)查詢五倍加碼券是否中獎，亦可一次查詢多筆(用「,」分隔)\n[範例]\n123\n123,987,456',
+        text: '請輸入身分證字號(至少末三碼)查詢五倍加碼券是否中獎，亦可一次查詢多筆(用「，」分隔)\n[範例]\n123\n123，987，456',
       },
       {
         type: 'text',
@@ -34,15 +34,15 @@ export class ChatService {
   public async receiveMessage(event: MessageEvent) {
     if (event.message.type === 'text') {
       const text = event.message.text;
-      if (!StringHelper.allAreCorrectId(text.split(',')))
+      if (!StringHelper.allAreCorrectId(text.split('，')))
         await this.replyDefaultTextMessage(event.replyToken);
-      else if (text.split(',').length > 5)
+      else if (text.split('，').length > 5)
         await this.client.replyMessage(event.replyToken, {
           type: 'text',
           text: '一次最多只能查詢 5 個',
         });
       else {
-        const messages: Message[] = text.split(',').map((v: string) => {
+        const messages: Message[] = text.split('，').map((v: string) => {
           return {
             type: 'text',
             text: this.voucherService.checkNumber(v),

@@ -14,17 +14,23 @@ export class ChatService {
   @inject(VoucherService)
   private readonly voucherService!: VoucherService;
 
+  private readonly defaultMessage: Message[] = [
+    {
+      type: 'text',
+      text: '請輸入身分證字號(至少末三碼)查詢五倍加碼券是否中獎，亦可一次查詢多筆(用「，」分隔)',
+    },
+    {
+      type: 'text',
+      text: '[範例]\n123\n123，987，456',
+    },
+    {
+      type: 'text',
+      text: '非官方，加碼券說明請參閱 https://5000.gov.tw/\n關於程式碼，請參閱 https://tinyurl.com/vcsau6a2',
+    },
+  ];
+
   private async replyDefaultTextMessage(replyToken: string) {
-    await this.client.replyMessage(replyToken, [
-      {
-        type: 'text',
-        text: '請輸入身分證字號(至少末三碼)查詢五倍加碼券是否中獎，亦可一次查詢多筆(用「，」分隔)\n[範例]\n123\n123，987，456',
-      },
-      {
-        type: 'text',
-        text: '非官方，加碼券說明請參閱 https://5000.gov.tw/\n關於程式碼，請參閱 https://tinyurl.com/vcsau6a2',
-      },
-    ]);
+    await this.client.replyMessage(replyToken, this.defaultMessage);
   }
 
   public async receiveFollowEvent(event: FollowEvent) {
@@ -35,7 +41,13 @@ export class ChatService {
     if (event.message.type === 'text') {
       const text = event.message.text;
       if (!StringHelper.allAreCorrectId(text.split('，')))
-        await this.replyDefaultTextMessage(event.replyToken);
+        await this.client.replyMessage(event.replyToken, [
+          {
+            type: 'text',
+            text: '格式錯誤，請參考下方範例',
+          },
+          ...this.defaultMessage,
+        ]);
       else if (text.split('，').length > 5)
         await this.client.replyMessage(event.replyToken, {
           type: 'text',

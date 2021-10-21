@@ -1,14 +1,5 @@
 import { injectable } from 'inversify';
-import {
-  AGRICULTURE,
-  ART_FUN_DIGIT,
-  ART_FUN_PAPER,
-  DOMESTIC_TRAVEL,
-  HAKKA,
-  I_YAUN,
-  REGIONAL_REVITALIZATION,
-  SPORTS,
-} from 'src/constant/prizeNumber';
+import { vouchers } from 'src/constant/voucher';
 
 /**
  * Service class for check the voucher number.
@@ -17,34 +8,42 @@ import {
 export class VoucherService {
   public checkNumber(input: string) {
     let message = `號碼 ${input}\n`;
-    message += `國旅券：${this.getResult(input, DOMESTIC_TRAVEL, 1000)}\n`;
-    message += `i原券：${this.getResult(input, I_YAUN, 1000)}\n`;
-    message += `農遊券：${this.getResult(input, AGRICULTURE, 888)}\n`;
-    message += `藝FUN券(數位)：${this.getResult(input, ART_FUN_DIGIT, 600)}\n`;
-    message += `藝FUN券(紙本)：${this.getResult(input, ART_FUN_PAPER, 600)}\n`;
-    message += `動滋券：${this.getResult(input, SPORTS, 500)}\n`;
-    message += `客庄券：${this.getResult(input, HAKKA, 500)}\n`;
-    message += `地方創生券：${this.getResult(
-      input,
-      REGIONAL_REVITALIZATION,
-      500
-    )}`;
+    message += `第1週: ${this.checkWeek(input, 0)}\n`;
+    message += `第2週: ${this.checkWeek(input, 1)}\n`;
+    message += `第3週: ${this.checkWeek(input, 2)}\n`;
+    message += `第4週: ${this.checkWeek(input, 3)}\n\n`;
+    message += '由於規則繁複，請以官方公告為準';
 
     return message;
   }
 
-  private getResult(input: string, prizeNumber: string[], amount: number) {
-    let res: string | undefined;
+  private isBingo(input: string, prizeNumber: string[]) {
+    let isBingo: boolean = false;
     prizeNumber.every((v: string) => {
       if (input.endsWith(v)) {
-        res = `中獎! $${amount} [${v}]`;
+        isBingo = true;
 
         return false;
       }
 
       return true;
     });
-    if (res !== undefined) return res;
-    else return '未中獎';
+
+    return isBingo;
+  }
+
+  private checkWeek(input: string, week: number) {
+    let message = '未中';
+    for (const v of vouchers) {
+      if (v.prizeNumberByWeek[week] === undefined) {
+        message += ' (本週尚未開完)';
+        break;
+      }
+      const isBingo = this.isBingo(input, v.prizeNumberByWeek[week]);
+      if (isBingo && message === '未中') message = `中! ${v.name}$${v.amount}`;
+      else if (isBingo) message += `、${v.name}$${v.amount}`;
+    }
+
+    return message;
   }
 }

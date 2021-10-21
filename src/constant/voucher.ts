@@ -61,7 +61,23 @@ export const sports: Voucher = {
 export const hakka: Voucher = {
   name: '客庄券',
   amount: 500,
-  prizeNumberByWeek: [['81', '900']],
+  prizeNumberByWeek: [
+    ['81', '900'],
+    [
+      '11',
+      '439',
+      '841',
+      '052',
+      '206',
+      '161',
+      '457',
+      '205',
+      '012',
+      '293',
+      '446',
+      '589',
+    ],
+  ],
 };
 
 export const regionalRevitalization: Voucher = {

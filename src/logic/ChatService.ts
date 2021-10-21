@@ -48,19 +48,23 @@ export class ChatService {
           },
           ...this.defaultMessage,
         ]);
-      else if (text.split('，').length > 5)
+      else if (text.split('，').length > 4)
         await this.client.replyMessage(event.replyToken, {
           type: 'text',
-          text: '一次最多只能查詢 5 個',
+          text: '一次最多只能查詢 4 個',
         });
       else {
-        const messages: Message[] = text.split('，').map((v: string) => {
-          return {
+        const messages: Message[] = text.split('，').map((v: string) => ({
+          type: 'text',
+          text: this.voucherService.checkNumber(v),
+        }));
+        await this.client.replyMessage(event.replyToken, [
+          ...messages,
+          {
             type: 'text',
-            text: this.voucherService.checkNumber(v),
-          };
-        });
-        await this.client.replyMessage(event.replyToken, messages);
+            text: '由於規則繁複，請以官方公告為準 https://5000.gov.tw/',
+          },
+        ]);
       }
     } else await this.replyDefaultTextMessage(event.replyToken);
   }

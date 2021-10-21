@@ -11,8 +11,7 @@ export class VoucherService {
     message += `第1週: ${this.checkWeek(input, 0)}\n`;
     message += `第2週: ${this.checkWeek(input, 1)}\n`;
     message += `第3週: ${this.checkWeek(input, 2)}\n`;
-    message += `第4週: ${this.checkWeek(input, 3)}\n\n`;
-    message += '由於規則繁複，請以官方公告為準';
+    message += `第4週: ${this.checkWeek(input, 3)}`;
 
     return message;
   }

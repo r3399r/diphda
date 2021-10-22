@@ -101,6 +101,7 @@ export const regionalRevitalization: Voucher = {
       '941',
       '335',
     ],
+    ['598', '880', '886', '675', '684', '568', '645', '456'],
   ],
 };
 

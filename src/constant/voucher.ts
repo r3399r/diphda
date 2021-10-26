@@ -20,6 +20,7 @@ export const iYuan: Voucher = {
   prizeNumberByWeek: [
     ['64', '85'],
     ['12', '59'],
+    ['48', '49'],
   ],
 };
 

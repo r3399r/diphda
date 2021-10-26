@@ -49,7 +49,7 @@ Resources:
                     }
                   },
                   "x-amazon-apigateway-integration": {
-                    "uri": !Sub "arn:aws:apigateway:ap-northeast-1:lambda:path/2015-03-31/functions/arn:aws:lambda:ap-northeast-1:278497686406:function:${TargetEnvr}-voucher/invocations",
+                    "uri": !Sub "arn:aws:apigateway:ap-northeast-1:lambda:path/2015-03-31/functions/arn:aws:lambda:ap-northeast-1:278497686406:function:${TargetEnvr}-diphda-voucher/invocations",
                     "responses": {
                       "default": {
                         "statusCode": "200"
@@ -75,7 +75,7 @@ Resources:
       Properties:
         Handler: index.voucher
         Runtime: !Sub ${NodeJsVer}
-        FunctionName: !Sub ${TargetEnvr}-voucher
+        FunctionName: !Sub ${TargetEnvr}-diphda-voucher
         Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/${LambdaExecutionRole}"
         CodeUri: ../../dist/webpack/lambda
         MemorySize: 128
@@ -87,7 +87,7 @@ Resources:
       Type: AWS::Lambda::Permission
       DependsOn: [ServerlessApi, LambdaVoucher]
       Properties:
-          FunctionName: !Sub ${TargetEnvr}-voucher
+          FunctionName: !Sub ${TargetEnvr}-diphda-voucher
           Action: 'lambda:InvokeFunction'
           Principal: apigateway.amazonaws.com
           SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ServerlessApi}/*

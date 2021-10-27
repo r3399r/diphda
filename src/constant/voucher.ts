@@ -30,6 +30,7 @@ export const argriculture: Voucher = {
   prizeNumberByWeek: [
     ['89', '32', '54', '597', '453', '152'],
     ['50', '13'],
+    ['60', '75'],
   ],
 };
 

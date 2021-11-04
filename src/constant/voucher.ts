@@ -102,6 +102,7 @@ export const hakka: Voucher = {
       '589',
     ],
     ['14', '269'],
+    ['69'],
   ],
 };
 

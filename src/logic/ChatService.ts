@@ -62,7 +62,7 @@ export class ChatService {
           ...messages,
           {
             type: 'text',
-            text: '由於規則繁複，請以官方公告為準 https://5000.gov.tw/',
+            text: '由於規則繁複，請以官方為準 https://5000.gov.tw/\n因抽獎活動已全數結束，敝服務將於 11/30 關閉，謝謝大家的支持與使用。\n若您對Line機器人或軟體開發有興趣、有idea，歡迎與我聯繫 ID: r3399r',
           },
         ]);
       }
